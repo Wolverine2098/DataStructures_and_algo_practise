@@ -26,15 +26,16 @@ void printTree(TreeNode<int>* root){
 
 
 TreeNode<int>* takeInput(){
+
     int rootData;
     cout<<"Enter Data"<<endl;
     cin>>rootData;
-    
+    TreeNode<int>* root = new TreeNode<int>(rootData);
 
     int n;
     cout<<"Enter number of children"<< rootData<<endl;
    cin>>n;
-
+   
    for(int i=0;i<n;i++){
        TreeNode<int>* child = takeInput();
        root->children.push_back(child);
@@ -94,16 +95,11 @@ while(pendingNodes.size()!=0){
     }
     cout<<endl;
     pendingNodes.pop();
-
+}
 }
 
-
-
-}
-
-
-
-TreeNode<int>* takeInputLevelWise(){
+TreeNode<int>* takeInputLevelWise()
+{
   int rootData;
     cout<<"Enter root Data"<<endl;
     cin>>rootData;
@@ -129,13 +125,47 @@ return root;
 }
 
 
-int numNodes(TreeNode<int>* root){
+int numNodes1(TreeNode<int>* root){
     int ans=1;
     for(int i=0;i<root->children.size();i++){
-        ans+=numNodes(root->children[i]);
+        ans+=numNodes1(root->children[i]);
     }
     return ans;
 }
+//1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0
+
+void preorder(TreeNode<int>* root){
+if(root == NULL){
+    return ;
+}
+
+    cout<<root->data<<" ";
+    for(int i=0;i<root->children.size();i++){
+        preorder(root->children[i]);
+    }
+
+}
+
+
+void printPostOrder(TreeNode<int>* root) {
+    if(root == NULL){
+        return ;
+    }
+    
+    for(int i=0;i<root->children.size();i++){
+        printPostOrder(root->children[i]);
+    }
+    
+    cout<<root->data<<" ";
+    
+    
+}
+
+
+
+
+
+
 
 int main(){
     // TreeNode<int>* root = new TreeNode<int>(1);
