@@ -11,6 +11,12 @@ class TreeNode{
         this->data = data;
 
     }
+
+    ~TreeNode(){
+        for(int i=0;i<children.size();i++){
+            delete children[i];
+        }
+    }
 };
 // raw way to print the tree
 void printTree(TreeNode<int>* root){
