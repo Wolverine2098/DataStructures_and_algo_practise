@@ -1,27 +1,28 @@
-#include<iostream>
-#include<stack>
-using namespace std;
-bool isBalanced(string expression) 
-{
-    stack <char> bracesStack;
-    for(int i=0;expression[i]!='\0';i++){
-        if(expression[i]==')'){
-            if(bracesStack.empty())
-                return false;
-            else
-                bracesStack.pop();
-        }
-        if(expression[i]=='('){
-            bracesStack.push('(');
-        }
-        
-    }
-    if(bracesStack.empty())
-        return true;
-    
-    return false;
-}
+int Solution::solve(string A) {
+    stack <char> checkP;
 
-int main(){
-    return 0;
+    for(int i=0;i<A.size();i++){
+    if(A[i]== '{' || A[i]== '(' || A[i] == '[')
+    checkP.push(A[i]);
+
+    else if(A[i]=='}' && !checkP.empty() && checkP.top()=='{')
+    checkP.pop();
+
+    else if(A[i]==')' && !checkP.empty() && checkP.top()=='(')
+    checkP.pop();
+
+    else if(A[i]==']' && !checkP.empty() && checkP.top()=='[')
+    checkP.pop();
+
+    else {
+        checkP.push(A[i]);
+    }
+    
+
+}
+if(checkP.empty())
+return 1;
+
+else 
+return 0;
 }
